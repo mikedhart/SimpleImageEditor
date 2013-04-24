@@ -9,6 +9,7 @@ var ImageEditor = function() {
 	var attachControlListeners = function () {
 		document.getElementById("control_stage_width").addEventListener("keyup", stageWidthKeyUpEventHandler, false);
 		document.getElementById("control_stage_height").addEventListener("keyup", stageHeightKeyUpEventHandler, false);
+		document.getElementById("control_stage_fill").addEventListener("change", updateBackgroundHandler, false);
 		document.getElementById("btn_control_add_text").addEventListener("click", addTextEventHandler, false);
 		document.getElementById("btn_control_save").addEventListener("click", saveStageEventHandler, false);
 
@@ -27,7 +28,7 @@ var ImageEditor = function() {
 				console.log(url);
 
 				$.post(
-					"savehandler.php", 
+					obj.ajaxUrl, 
 					{ data: url },
 	            	function(data) {
 	        			console.log(data);
@@ -125,18 +126,50 @@ var ImageEditor = function() {
 		return obj.stage;
 	};
 
+	var getStageWidth = function () {
+		return obj.stage.getWidth();
+	};
+
+	var getStageHeight = function () {
+		return obj.stage.getHeight();
+	};
+
+	var updateBackgroundHandler = function (e) {
+		var target = e.target || window.event.srcElement;
+		var value = target.value;
+
+		var background = new Kinetic.Rect({
+			x : 0,
+			y : 0,
+			width : getStageWidth(),
+			height : getStageHeight(),
+			fill : value,
+			draggable : false
+		});
+
+		obj.bgLayer.clear();
+		obj.bgLayer.add(background);
+		obj.bgLayer.draw();
+		obj.bgLayer.moveToBottom();
+	};
+
 	var obj = {
+		ajaxUrl : "savehandler.php",
+
 		stage : new Kinetic.Stage({
 			container : "container",
 			width : 400,
 			height : 300
 		}),
 
+		bgLayer : new Kinetic.Layer(),
+
 		layer : new Kinetic.Layer(),
 
 		initialise : function () {
 			attachControlListeners();
 			this.stage.add(this.layer);
+			this.stage.add(this.bgLayer);
 		}
 	};
 
