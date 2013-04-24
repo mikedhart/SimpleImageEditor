@@ -1,0 +1,156 @@
+<html>
+<head>
+	<title>Image Editor</title>
+	<script type="text/javascript" src="js/jq.js"></script>
+	<script type="text/javascript" src="js/kinetic.js"></script>
+	<script type="text/javascript" src="js/ImageEditor.js"></script>
+
+	<style type="text/css">
+	.kineticjs-content {
+		border: thin solid grey;
+	}
+	</style>
+
+<body>
+	<form id="image-editor-control">
+		<fieldset>
+			<legend>Stage Size</legend>
+			<label for="control_stage_width">Stage width</label>
+			<input type="text" name="control[stage_width]" id="control_stage_width" />
+			<label for="control_stage_height">Stage height</label>
+			<input type="text" name="control[stage_height]" id="control_stage_height" />
+		</fieldset>
+		<fieldset>
+			<legend>Text</legend>
+			<label for="stage_width">Add text</label>
+			<input data-key="text_1" type="text" name="control[add_text]" id="control_add_text" />
+			<select name="control[add_text_font]" id="control_add_text_font">
+				<option>Arial</option>
+				<option>Times New Roman</option>
+			</select>
+			<input placeholder="Enter a font size" type="text" name="control[add_text_size]" id="control_add_text_size" />
+			<input type="color" name="control[add_text_color]" id="control_add_text_color" />
+			<a href="#" id="btn_control_add_text">Add text</a>
+		</fieldset>
+		<fieldset>
+			<legend>Images</legend>
+			<img class="addable-image" width="100" height="100" src="10932390.jpg">
+		</fieldset>
+		<a href="#" id="btn_control_save">Save Image</a>
+	</form><!-- image editor-control -->
+
+	<div id="container">
+
+	</div><!-- container -->
+
+	<script type="text/javascript">
+		$(document).ready(function (e) {
+			editor = new ImageEditor();
+			editor.initialise();
+
+			var rect = new Kinetic.Rect({
+				x : 200,
+				y : 100,
+				width : 100,
+				height : 80,
+				fill : "blue",
+				stroke : "red",
+				strokeWidth : 2,
+				draggable : true
+			});
+
+			// $('#control_add_text_color').ColorPicker({flat: true});
+
+			/*layer = editor.createLayer("test");
+			layer.add(rect);
+			editor.stage.add(layer);*/
+		});
+		/*var stage = new Kinetic.Stage({
+			container : "container",
+			width : 400,
+			height : 300
+		});
+
+		var layer = new Kinetic.Layer();
+
+		var rect = new Kinetic.Rect({
+			x : 200,
+			y : 100,
+			width : 100,
+			height : 80,
+			fill : "blue",
+			stroke : "red",
+			strokeWidth : 2,
+			draggable : true
+		});
+
+		var circle = new Kinetic.Circle({
+			x: stage.getWidth() / 2,
+	        y: stage.getHeight() / 2,
+	        radius: 70,
+	        fill: 'red',
+	        stroke: 'black',
+	        strokeWidth: 4
+		});
+
+		var line = new Kinetic.Line({
+			points : [73, 70, 340, 50, 450, 60, 500, 20],
+			stroke : "#ff0000",
+			strokeWidth : 10,
+			lineCap : 'round',
+			lineJoin : 'round'
+		});
+
+		var imageObj = new Image();
+
+		imageObj.onload = function () {
+			var yoda = new Kinetic.Image({
+				x : 320,
+				y : stage.getHeight() / 2 - 59,
+				image : imageObj,
+				width : 106,
+				height : 118,
+				draggable : true
+			});
+
+			layer.add(yoda);
+			stage.add(layer);
+		};
+
+		imageObj.src = "10932390.jpg";
+
+		text = new Kinetic.Text({
+			x : 10,
+			y : 10,
+			text : "lalalala",
+			fontSize : 20,
+			fontFamily: "Arial",
+			fill : "#00ff00"
+		});
+
+		layer.add(rect);
+		layer.add(circle);
+		layer.add(line);
+		layer.add(text);
+		stage.add(layer);
+
+
+		rect.on("mouseover", function () {
+			document.body.style.cursor = "pointer"
+		});
+
+		rect.on("mouseout", function() {
+			document.body.style.cursor = 'default';
+		});
+
+		function exporta()
+		{
+			stage.toDataURL({
+				callback : function(url) {
+					document.write(url);
+				}
+			});
+		}*/
+	</script>
+</body>
+</html>
